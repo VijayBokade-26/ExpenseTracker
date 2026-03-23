@@ -380,20 +380,20 @@
 .stat-card {
   padding: 18px;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.96);
-  border: 1px solid rgba(148, 163, 184, 0.12);
+  background: var(--bg-glass);
+  border: var(--border-soft);
   box-shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
 }
 
 .stat-card span {
-  color: #64748b;
+  color: #ffff;
   font-size: 0.88rem;
 }
 
 .stat-card strong {
   display: block;
   margin-top: 8px;
-  color: #0f172a;
+  color: #fff;
   font-size: 1.5rem;
 }
 
@@ -414,8 +414,8 @@
 .dashboard-details {
   padding: 22px;
   border-radius: 22px;
-  background: rgba(255, 255, 255, 0.96);
-  border: 1px solid rgba(148, 163, 184, 0.12);
+  background: var(--bg-glass);
+  border: var(--border-soft);
   box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
 }
 
@@ -429,7 +429,7 @@
 
 .content-head h3 {
   margin: 8px 0 0;
-  color: #0f172a;
+  color: #fff;
   font-size: 1.15rem;
 }
 
@@ -463,12 +463,12 @@
   align-items: center;
   padding: 14px 16px;
   border-radius: 16px;
-  background: #f8fafc;
-  border: 1px solid rgba(148, 163, 184, 0.12);
+  background: var(--bg-glass);
+  border: var(--border-soft);
 }
 
 .expense-row strong {
-  color: #0f172a;
+  color: #fff;
 }
 
 .expense-row span {
@@ -528,16 +528,16 @@
   align-items: center;
   padding: 14px 16px;
   border-radius: 16px;
-  background: #f8fafc;
-  border: 1px solid rgba(148, 163, 184, 0.12);
+  background: var(--bg-glass);
+  border: var(--border-soft);
 }
 
 .detail-row span {
-  color: #64748b;
+  color: #ffff;
 }
 
 .detail-row strong {
-  color: #0f172a;
+  color: #fff;
   text-align: right;
 }
 
