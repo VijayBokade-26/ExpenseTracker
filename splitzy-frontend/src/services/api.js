@@ -1,4 +1,4 @@
-const BASE_URL = "http://127.0.0.1:8000";
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 export const signupUser = async (data) => {
   const response = await fetch(`${BASE_URL}/auth/signup`, {
@@ -25,16 +25,11 @@ export const loginUser = async (data) => {
 };
 
 export const getUser = async () => {
-    const token =localStorage.getItem("token")
+  const token = localStorage.getItem("token");
 
-    const response = await fetch(
-        "http://127.0.0.1:8000/api",
-        {
-            method : "GET",
-            headers : {"Authorization":`Bearer ${token}`,},       
-        }
-
-    );
-    return response.json()
-
+  const response = await fetch(`${BASE_URL}/api`, {
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.json();
 };
