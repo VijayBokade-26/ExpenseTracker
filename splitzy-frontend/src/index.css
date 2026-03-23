@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --app-bg: #081019;
+  --app-bg-alt: #0d1723;
+  --app-surface: rgba(12, 20, 31, 0.86);
+  --app-surface-strong: #111b29;
+  --app-border: rgba(120, 214, 135, 0.14);
+  --app-green: #49d26f;
+  --app-green-dark: #33b356;
+  --app-green-soft: rgba(73, 210, 111, 0.12);
+  --app-ink: #eff7f1;
+  --app-muted: #9bacb0;
+  --app-shadow: 0 28px 70px rgba(0, 0, 0, 0.38);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Manrope", system-ui, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(73, 210, 111, 0.12), transparent 22%),
+    radial-gradient(circle at bottom right, rgba(73, 210, 111, 0.08), transparent 26%),
+    linear-gradient(180deg, #09111a 0%, #060b12 100%);
+  color: var(--app-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
