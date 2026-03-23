@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
     BarChart3,
@@ -15,6 +15,11 @@ function Landing() {
     const navigate = useNavigate();
     const isLoggedIn = !!localStorage.getItem("token");
 
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate("/dashboard");
+        }
+    }, [isLoggedIn, navigate]);
     return (
         <div className="landing-container">
             {/* Navigation */}
