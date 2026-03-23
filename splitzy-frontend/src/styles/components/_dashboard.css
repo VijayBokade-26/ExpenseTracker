@@ -1,14 +1,23 @@
 .dashboard-page {
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   background:
-    radial-gradient(circle at top left, rgba(37, 197, 93, 0.16), transparent 20%),
-    radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.1), transparent 24%),
+    radial-gradient(
+      circle at top left,
+      rgba(37, 197, 93, 0.16),
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(59, 130, 246, 0.1),
+      transparent 24%
+    ),
     linear-gradient(180deg, #08111a 0%, #060b12 100%);
   color: #e5eef7;
 }
 
 .dashboard-layout {
-  min-height: 100vh;
+  height: 100%; /* ✅ IMPORTANT */
   display: grid;
   grid-template-columns: 280px minmax(0, 1fr);
 }
@@ -19,9 +28,14 @@
   flex-direction: column;
   gap: 18px;
   padding: 22px 18px;
+  overflow: auto;
+  /* hide scrollbar but scrololable */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
   background: linear-gradient(180deg, #101827 0%, #0b1220 100%);
   border-right: 1px solid rgba(148, 163, 184, 0.14);
   color: #e5eef7;
+  height: 100%; /* ✅ full height */
 }
 
 .sidebar-brand {
@@ -33,12 +47,9 @@
 }
 
 .sidebar-logo {
-  width: 48px;
-  height: 48px;
-  padding: 6px;
+  width: 60px;
+  height: 60px;
   border-radius: 14px;
-  object-fit: contain;
-  background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(110, 231, 183, 0.16);
 }
 
@@ -114,7 +125,10 @@
   font: inherit;
   text-align: left;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .sidebar-nav-item:hover,
@@ -132,7 +146,6 @@
 }
 
 .sidebar-future {
-  margin-top: auto;
   padding: 16px;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.04);
@@ -180,8 +193,12 @@
 }
 
 .dashboard-main {
+  height: 100%;
+  overflow-y: auto;
   padding: 22px 22px 34px;
-  display: grid;
+
+  display: flex; /* ✅ FIX */
+  flex-direction: column; /* ✅ IMPORTANT */
   gap: 18px;
 }
 
@@ -194,7 +211,7 @@
   border-radius: 26px;
   background:
     linear-gradient(135deg, rgba(13, 20, 30, 0.92), rgba(8, 15, 25, 0.96)),
-    url("../assets/exp-tracker-logo1.png") center right/cover no-repeat;
+    url("../../assets/exp-tracker-logo.png") center right/cover no-repeat;
   border: 1px solid rgba(110, 231, 183, 0.14);
   box-shadow: 0 24px 50px rgba(0, 0, 0, 0.3);
 }
@@ -203,7 +220,12 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(6, 11, 18, 0.15), rgba(6, 11, 18, 0.38) 55%, rgba(6, 11, 18, 0.12));
+  background: linear-gradient(
+    90deg,
+    rgba(6, 11, 18, 0.15),
+    rgba(6, 11, 18, 0.38) 55%,
+    rgba(6, 11, 18, 0.12)
+  );
   pointer-events: none;
 }
 

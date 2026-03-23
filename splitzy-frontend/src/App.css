@@ -8,10 +8,23 @@
   overflow: hidden;
   isolation: isolate;
   background:
-    radial-gradient(circle at 16% 24%, rgba(73, 210, 111, 0.34), transparent 20%),
-    radial-gradient(circle at 82% 78%, rgba(73, 210, 111, 0.14), transparent 18%),
-    linear-gradient(90deg, rgba(6, 11, 18, 0.96) 0%, rgba(9, 16, 25, 0.9) 42%, rgba(6, 11, 18, 0.88) 100%),
-    url("./assets/exp-tracker-logo1.png") center right/cover no-repeat;
+    radial-gradient(
+      circle at 16% 24%,
+      rgba(73, 210, 111, 0.34),
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 82% 78%,
+      rgba(73, 210, 111, 0.14),
+      transparent 18%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(6, 11, 18, 0.96) 0%,
+      rgba(9, 16, 25, 0.9) 42%,
+      rgba(6, 11, 18, 0.88) 100%
+    ),
+    url("./assets/exp-tracker-logo.png") center right/cover no-repeat;
 }
 
 .signup-bg::before {
@@ -19,8 +32,17 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(7, 12, 18, 0.14), rgba(7, 12, 18, 0.42) 56%, rgba(7, 12, 18, 0.18)),
-    radial-gradient(circle at 20% 20%, rgba(73, 210, 111, 0.08), transparent 28%);
+    linear-gradient(
+      90deg,
+      rgba(7, 12, 18, 0.14),
+      rgba(7, 12, 18, 0.42) 56%,
+      rgba(7, 12, 18, 0.18)
+    ),
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(73, 210, 111, 0.08),
+      transparent 28%
+    );
   pointer-events: none;
   z-index: -1;
 }
@@ -62,7 +84,10 @@
   color: #f4fbf6;
   font-size: 0.98rem;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
 .signup-card input::placeholder {
@@ -86,7 +111,10 @@
   font-weight: 800;
   cursor: pointer;
   box-shadow: 0 16px 30px rgba(73, 210, 111, 0.18);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
 }
 
 .signup-card button:hover {
@@ -124,7 +152,7 @@
   max-width: 1100px;
   margin: 30px auto;
   border-radius: 12px;
-  overflow: hidden;
+  /* overflow: hidden; */
   background: #0b1f2e;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
@@ -133,7 +161,7 @@
 .cover {
   position: relative;
   height: 180px;
-  background: url("../src//assets/exp-tracker-logo1.png") center/cover no-repeat;
+  background: url("../src//assets/exp-tracker-logo.png") center/cover no-repeat;
 }
 
 /* Dark overlay */
@@ -193,11 +221,34 @@
   margin-top: 60px;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   padding: 15px;
   border-top: 1px solid #1e293b;
   color: #cbd5e1;
 }
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap; /* responsive */
+}
 
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+/* Optional: icon styling */
+.info-item svg {
+  width: 16px;
+  height: 16px;
+  color: #16a34a; /* green accent */
+  flex-shrink: 0;
+}
 .info-item {
   font-size: 14px;
 }
@@ -218,6 +269,104 @@
   .info-row {
     flex-direction: column;
     gap: 10px;
+    justify-content: center;
     align-items: center;
   }
+}
+
+/* Form Validation Styles */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid rgba(148, 163, 184, 0.2);
+  border-radius: 8px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #e5eef7;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #667eea;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-input::placeholder {
+  color: rgba(229, 238, 247, 0.6);
+}
+
+.form-input.error {
+  border-color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.05);
+}
+
+.error-message {
+  color: #ff6b6b;
+  font-size: 12px;
+  margin-top: 4px;
+  font-weight: 500;
+  display: block;
+}
+
+.form-button {
+  width: 100%;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+
+.form-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
+}
+
+.form-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.form-button:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Toast Container Customization */
+.Toastify__toast-container {
+  font-family: inherit;
+}
+
+.Toastify__toast {
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.Toastify__toast--success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.Toastify__toast--error {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.Toastify__toast--warning {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+.Toastify__toast--info {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
 }
