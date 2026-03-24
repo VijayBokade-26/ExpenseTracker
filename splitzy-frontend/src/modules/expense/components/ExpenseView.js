@@ -333,7 +333,14 @@ const ExpenseView = () => {
                     expense.category.slice(1)
                   }
                 >
-                  {categories[expense.category]}
+                  <span
+                    style={{
+                      backgroundColor: "#253046ff",
+                      padding: "5px",
+                    }}
+                  >
+                    {categories[expense.category]}
+                  </span>
                 </td>
                 <td>${expense.amount}</td>
                 <td>{new Date(expense.date).toLocaleDateString()}</td>
