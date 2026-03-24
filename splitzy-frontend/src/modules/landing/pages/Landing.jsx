@@ -8,6 +8,8 @@ import {
     ArrowRight,
     Zap,
     Shield,
+    BarChartBig,
+    Users2,
 } from "lucide-react";
 import "../styles/landing.css";
 
@@ -106,21 +108,21 @@ function Landing() {
 
                 <div className="hero-image">
                     <div className="floating-card card-1">
-                        <div className="card-icon">📊</div>
+                        <div className="card-icon"><BarChartBig color="red" /></div>
                         <div>
                             <p>Monthly Spending</p>
                             <strong>₹24,860</strong>
                         </div>
                     </div>
                     <div className="floating-card card-2">
-                        <div className="card-icon">👥</div>
+                        <div className="card-icon"><Users2 color="blue" /></div>
                         <div>
                             <p>Split with Friends</p>
                             <strong>8 Groups</strong>
                         </div>
                     </div>
                     <div className="floating-card card-3">
-                        <div className="card-icon">📈</div>
+                        <div className="card-icon"><TrendingUp color="green" /></div>
                         <div>
                             <p>Savings Target</p>
                             <strong>₹50,000</strong>

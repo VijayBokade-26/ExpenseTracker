@@ -69,7 +69,7 @@ function Dashboard() {
           <div className="content-head">
             <div>
               <span className="section-tag">Category Split</span>
-              <h3>Where money is going</h3>
+              <h3>Look, Where money is going</h3>
             </div>
             <p>Simple visual breakdown</p>
           </div>

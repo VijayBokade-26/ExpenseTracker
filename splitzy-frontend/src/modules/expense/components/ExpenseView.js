@@ -20,12 +20,12 @@ import {
 
 //category + its icon
 const categories = {
-  food: <Utensils size={16} />, // 🍽️ Food
-  entertainment: <Film size={16} />, // 🎬 Movies/Fun
-  utilities: <Lightbulb size={16} />, // 💡 Bills/Electricity
-  travel: <Car size={16} />, // ✈️ Travel
-  shopping: <ShoppingBag size={16} />, // 🛍️ Shopping
-  other: <MoreHorizontal size={16} />, // ➕ Others
+  food: <Utensils size={16} />, //  Food
+  entertainment: <Film size={16} />, //  Movies/Fun
+  utilities: <Lightbulb size={16} />, //  Bills/Electricity
+  travel: <Car size={16} />, //  Travel
+  shopping: <ShoppingBag size={16} />, //  Shopping
+  other: <MoreHorizontal size={16} />, //  Others
 };
 const ExpenseView = () => {
   const [expenses, setExpenses] = useState([]);
