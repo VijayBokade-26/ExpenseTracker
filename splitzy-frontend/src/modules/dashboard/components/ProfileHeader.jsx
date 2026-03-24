@@ -6,6 +6,7 @@ import { getUser } from "../../../services/methods";
 
 function ProfileHeader() {
   const [user, setUser] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const fetchUser = useCallback(async () => {
     try {
       const data = await getUser();
@@ -26,13 +27,26 @@ function ProfileHeader() {
         <div className="overlay"></div>
 
         <div className="profile-info">
-          <img src={profileImg} alt="profile" className="profile-img" />
+          <img src={profileImg} alt="profile" className="profile-img"
+            onClick={() => setShowModal(true)}
+          />
+          {showModal && (
+            <div className="img-modal" onClick={() => setShowModal(false)}>
+              <span className="close-btn">&times;</span>
 
+              <img
+                src={profileImg}
+                alt="large"
+                className="modal-img"
+                onClick={(e) => e.stopPropagation()} // prevent closing when clicking image
+              />
+            </div>
+          )}
           <div className="user-details">
             <h2>
               {user?.name}  <span className="badge">IN</span>
             </h2>
-            <p>welcome back, {user?.name}!</p>
+            <p>welcome, {user?.name}!</p>
           </div>
         </div>
       </div>
