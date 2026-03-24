@@ -7,6 +7,7 @@ import {
   CreditCard,
   Settings,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const getInitials = (name = "User") =>
   name
@@ -18,15 +19,17 @@ const getInitials = (name = "User") =>
     .toUpperCase();
 
 const sidebarItems = [
-  { label: "Dashboard", icon: LayoutDashboard },
-  { label: "Expenses", icon: Wallet },
-  { label: "Budgets", icon: PieChart },
-  { label: "Reports", icon: BarChart3 },
-  { label: "Cards", icon: CreditCard },
-  { label: "Settings", icon: Settings },
+  { label: "Dashboard", icon: LayoutDashboard, redirectTo: "/dashboard" },
+  { label: "Expenses", icon: Wallet, redirectTo: "/expenses" },
+  { label: "Budgets", icon: PieChart, redirectTo: "/budgets" },
+  { label: "Reports", icon: BarChart3, redirectTo: "/reports" },
+  { label: "Cards", icon: CreditCard, redirectTo: "/cards" },
+  { label: "Settings", icon: Settings, redirectTo: "/settings" },
 ];
 
 function Sidebar({ user, loading, onLogout, logo }) {
+  const Navigate = useNavigate();
+  const isActive = (path) => window.location.pathname === path;
   return (
     <aside className="dashboard-sidebar">
       <div className="sidebar-brand">
@@ -54,7 +57,8 @@ function Sidebar({ user, loading, onLogout, logo }) {
           return (
             <button
               key={item.label}
-              className={`sidebar-nav-item ${index === 0 ? "active" : ""}`}
+              className={`sidebar-nav-item ${isActive(item.redirectTo) ? "active" : ""}`}
+              onClick={() => Navigate(item.redirectTo)}
             >
               <Icon size={18} className="nav-icon" />
               {item.label}

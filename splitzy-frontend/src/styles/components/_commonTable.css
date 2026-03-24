@@ -1,0 +1,81 @@
+.common-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.common-table th,
+.common-table td {
+  padding: 12px 15px;
+  border: 1px solid #1e293b;
+  text-align: left;
+  color: #cbd5e1;
+}
+.common-table th {
+  background-color: #1e293b;
+  color: #16a34a; /* green accent */
+}
+.common-table tbody tr:hover {
+  background-color: #334155;
+  cursor: pointer;
+}
+
+.common-table .nodatafound {
+  text-align: center;
+  color: #94a3b8;
+  padding: 20px;
+}
+.common-container {
+  padding: 20px;
+  background-color: #1e293b;
+  border-radius: 8px;
+}
+.common-input {
+  width: 100%;
+  padding: 8px;
+  margin: 5px;
+  border: 1px solid #d3d8e0;
+  border-radius: 4px;
+  background-color: #1e293b;
+  color: #cbd5e1;
+}
+.common-input:focus {
+  outline: none;
+  border-color: #16a34a; /* green accent */
+  box-shadow: 0 0 5px rgba(22, 163, 74, 0.5);
+}
+.common-select {
+  width: 100%;
+  padding: 8px;
+  margin: 5px;
+  border: 1px solid #d3d8e0;
+  border-radius: 4px;
+  background-color: #1e293b;
+  color: #cbd5e1;
+}
+.common-select:focus {
+  outline: none;
+  border-color: #16a34a; /* green accent */
+  box-shadow: 0 0 5px rgba(22, 163, 74, 0.5);
+}
+
+.common-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #16a34a; /* green accent */
+  color: #fff;
+  cursor: pointer;
+}
+.common-button:hover {
+  background-color: #15803d; /* darker green on hover */
+}
+
+.common-gap {
+  display: flex;
+  gap: 10px;
+}
+
+.error-message {
+  color: #ef4444; /* red accent */
+  margin-top: 5px;
+}

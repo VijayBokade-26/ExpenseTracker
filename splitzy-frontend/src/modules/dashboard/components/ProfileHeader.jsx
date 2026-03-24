@@ -1,7 +1,23 @@
+import { useCallback, useEffect, useState } from "react";
 import profileImg from "../../../assets/download.jpeg";
 import { Mail, Phone, MapPin, IdCardIcon } from "lucide-react";
+import { getUser } from "../../../services/api";
 
-function ProfileHeader({ user }) {
+function ProfileHeader() {
+  const [user, setUser] = useState(null);
+  const fetchUser = useCallback(async () => {
+    try {
+      const data = await getUser();
+
+
+      setUser(data);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+    }
+  }, []);
+  useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
   return (
     <div className="profile-card">
       {/* Cover Section */}

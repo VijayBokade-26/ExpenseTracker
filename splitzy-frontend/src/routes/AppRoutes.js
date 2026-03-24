@@ -6,6 +6,7 @@ import { Landing } from "../modules/landing";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
 import Dashboard from "../modules/dashboard/pages/DashboardPage";
+import ExpenseModule from "../modules/expense/pages";
 
 const AppRoutes = () => {
   return (
@@ -38,6 +39,15 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/expenses"
+        element={
+          <ProtectedRoute>
+            <ExpenseModule />
           </ProtectedRoute>
         }
       />
