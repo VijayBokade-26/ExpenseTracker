@@ -232,7 +232,7 @@ const ExpenseView = () => {
                   );
                   exportToExcel(recordsToExport, "Expenses");
                 }}
-                className=" common-button"
+                className=" common-button animation-fadeInOut"
               >
                 <Sheet size={16} /> Export
               </button>
@@ -240,7 +240,7 @@ const ExpenseView = () => {
                 onClick={() => {
                   // Handle bulk delete action here (not implemented in this snippet)
                 }}
-                className=" common-button-danger "
+                className=" common-button-danger animation-fadeInOut "
               >
                 <Trash2 size={16} /> Delete Selected ({selectedRecords.length})
               </button>
