@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
-import { getUser } from "../services/api";
+import { getUser } from "../services/methods";
 
 function MainLayout({ children }) {
   const [user, setUser] = useState(null);

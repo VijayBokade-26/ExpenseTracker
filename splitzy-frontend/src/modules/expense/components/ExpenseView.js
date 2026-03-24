@@ -1,9 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  createExpense,
-  fetchExpenses,
-  updateExpense,
-} from "../../../services/api";
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
@@ -16,6 +12,11 @@ import {
   ShoppingBag,
   Utensils,
 } from "lucide-react";
+import {
+  createExpense,
+  fetchExpenses,
+  updateExpense,
+} from "../../../services/methods";
 
 //category + its icon
 const categories = {

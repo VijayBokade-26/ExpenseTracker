@@ -1,10 +1,10 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { signupUser } from "../../../services/api";
 import { Link } from "react-router-dom";
 import "../../../App.css";
 import { toast } from "react-toastify";
+import { signupUser } from "../../../services/methods";
 
 const signupSchema = Yup.object().shape({
   name: Yup.string()

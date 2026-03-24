@@ -93,7 +93,7 @@ function Dashboard() {
         </article>
       </section>
 
-      <section className="dashboard-details">
+      {/* <section className="dashboard-details">
         <div className="content-head">
           <div>
             <span className="section-tag">Your Data</span>
@@ -101,7 +101,7 @@ function Dashboard() {
           </div>
           <p>User details from the API</p>
         </div>
-      </section>
+      </section> */}
     </MainLayout>
   );
 }

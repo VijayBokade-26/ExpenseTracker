@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import profileImg from "../../../assets/download.jpeg";
 import { Mail, Phone, MapPin, IdCardIcon } from "lucide-react";
-import { getUser } from "../../../services/api";
+import { getUser } from "../../../services/methods";
+
 
 function ProfileHeader() {
   const [user, setUser] = useState(null);

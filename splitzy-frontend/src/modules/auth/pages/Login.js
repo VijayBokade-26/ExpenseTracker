@@ -1,11 +1,11 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { loginUser } from "../../../services/api";
 import { Link } from "react-router-dom";
 import "../../../App.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { loginUser } from "../../../services/methods";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
