@@ -40,16 +40,6 @@ function Sidebar({ user, loading, onLogout, logo }) {
         </div>
       </div>
 
-      <div className="sidebar-profile">
-        <div className="sidebar-avatar">{getInitials(user?.name)}</div>
-        <div>
-          <strong>{loading ? "Loading..." : user?.name || "User"}</strong>
-          <span>
-            {loading ? "Please wait" : user?.email || "user@email.com"}
-          </span>
-        </div>
-      </div>
-
       <nav className="sidebar-nav">
         {sidebarItems.map((item, index) => {
           const Icon = item.icon;
@@ -66,7 +56,15 @@ function Sidebar({ user, loading, onLogout, logo }) {
           );
         })}
       </nav>
-
+      <div className="sidebar-profile" style={{ marginTop: "auto" }}>
+        <div className="sidebar-avatar">{getInitials(user?.name)}</div>
+        <div>
+          <strong>{loading ? "Loading..." : user?.name || "User"}</strong>
+          <span>
+            {loading ? "Please wait" : user?.email || "user@email.com"}
+          </span>
+        </div>
+      </div>
       <div className="sidebar-footer">
         <button className="sidebar-logout" onClick={onLogout}>
           Logout
