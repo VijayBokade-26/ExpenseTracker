@@ -44,7 +44,8 @@ function ProfileHeader() {
           )}
           <div className="user-details">
             <h2>
-              {user?.name}  <span className="badge">IN</span>
+              {user?.name}
+              {/* <span className="badge">IN</span> */}
             </h2>
             <p>welcome, {user?.name}!</p>
           </div>
