@@ -43,7 +43,7 @@ function Login() {
   return (
     <div className="signup-bg">
       <div className="signup-card">
-        <h2>Welcome back</h2>
+        <h2>Welcome</h2>
         <p className="subtitle">Log in to continue tracking.</p>
 
         <Formik

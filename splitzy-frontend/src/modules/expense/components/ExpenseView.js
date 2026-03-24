@@ -10,6 +10,8 @@ import {
   MoreHorizontal,
   PlusCircle,
   ShoppingBag,
+  Trash2,
+  Trash2Icon,
   Utensils,
 } from "lucide-react";
 import {
@@ -32,6 +34,7 @@ const ExpenseView = () => {
   const [loading, setLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
   const [selectedExpense, setSelectedExpense] = useState(null);
+  const [selectedRecords, setSelectedRecords] = useState([]);
   const dateRef = useRef();
 
   //fetch expenses from API and setExpenses
@@ -52,6 +55,7 @@ const ExpenseView = () => {
   }, []);
 
   const handleAddExpense = () => {
+    selectedRecords.length > 0 && setSelectedRecords([]);
     formik.resetForm();
     setShowAddForm(true);
   };
@@ -197,25 +201,63 @@ const ExpenseView = () => {
             </form>
           </div>
         )}
-        {!showAddForm && (
-          <button onClick={handleAddExpense} className="common-button">
-            <PlusCircle size={16} /> Add Expense
-          </button>
-        )}
+        <div
+          className={`common-gap ${showAddForm ? "" : "common-container "}`}
+          style={{ display: "flex", justifyContent: "space-between" }}
+        >
+          {!showAddForm && (
+            <button onClick={handleAddExpense} className="common-button">
+              <PlusCircle size={16} /> Add Expense
+            </button>
+          )}
+
+          {selectedRecords.length > 0 && !showAddForm && (
+            <button
+              onClick={() => {
+                // Handle bulk delete action here (not implemented in this snippet)
+              }}
+              className=" common-button-danger "
+            >
+              <Trash2 size={16} /> Delete Selected ({selectedRecords.length})
+            </button>
+          )}
+        </div>
       </div>
       <table className="common-table">
         <thead>
           <tr>
-            <th>#ID</th>
+            <th style={{ width: "5px" }}>
+              <input
+                type="checkbox"
+                className="common-checkbox"
+                checked={
+                  expenses.data?.length > 0 &&
+                  selectedRecords.length === expenses.data.length
+                }
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setSelectedRecords(expenses.data || []); // ✅ correct
+                  } else {
+                    setSelectedRecords([]);
+                  }
+                }}
+              />
+            </th>
+            <th style={{ width: "5px" }}>#ID</th>
             <th>Title</th>
-            <th>Category</th>
-            <th>Amount</th>
-            <th>Date</th>
+            <th title="Category" style={{ width: "2px" }}>
+              CT
+            </th>
+            <th style={{ width: "10px" }}>Amount</th>
+            <th style={{ width: "10px" }}>Date</th>
+            <th style={{ width: "5px" }} title="Operations">
+              OP
+            </th>
           </tr>
         </thead>
         <tbody>
           {loading ? (
-            <td colSpan="5" className="nodatafound">
+            <td colSpan="7" className="nodatafound">
               Loading...
             </td>
           ) : expenses.data.length > 0 ? (
@@ -224,25 +266,65 @@ const ExpenseView = () => {
                 key={expense.id}
                 onClick={() => {
                   setSelectedExpense(expense);
+                  selectedRecords.length > 0 && setSelectedRecords([]);
                   setShowAddForm(true);
                 }}
                 title={`Click To Edit ID ${expense.id}`}
               >
+                <td
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    title={
+                      selectedRecords.some((item) => item.id === expense.id)
+                        ? "Deselect Record"
+                        : "Select Record"
+                    }
+                    className="common-checkbox"
+                    checked={selectedRecords.some(
+                      (item) => item.id === expense.id,
+                    )}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setSelectedRecords([...selectedRecords, expense]);
+                      } else {
+                        setSelectedRecords(
+                          selectedRecords.filter(
+                            (item) => item.id !== expense.id,
+                          ),
+                        );
+                      }
+                    }}
+                  />
+                </td>
                 <td>#{expense.id}</td>
                 <td>{expense.title}</td>
                 <td
-                  style={{ display: "flex", alignItems: "center", gap: "4px" }}
+                  title={
+                    expense.category.charAt(0).toUpperCase() +
+                    expense.category.slice(1)
+                  }
                 >
                   {categories[expense.category]}
-                  {expense.category.charAt(0).toUpperCase() +
-                    expense.category.slice(1)}
                 </td>
                 <td>${expense.amount}</td>
                 <td>{new Date(expense.date).toLocaleDateString()}</td>
+                <td
+                  title={`Remove Expense ${expense.id}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    // Handle delete action here (not implemented in this snippet)
+                  }}
+                >
+                  <Trash2Icon size={16} color="red" />
+                </td>
               </tr>
             ))
           ) : (
-            <td colSpan="5" className="nodatafound">
+            <td colSpan="7" className="nodatafound">
               No expenses found.
             </td>
           )}
