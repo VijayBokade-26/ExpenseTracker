@@ -65,6 +65,8 @@
   background-color: #16a34a; /* green accent */
   color: #fff;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 .common-button:hover {
   background-color: #15803d; /* darker green on hover */
@@ -77,5 +79,6 @@
 
 .error-message {
   color: #ef4444; /* red accent */
-  margin-top: 5px;
+  font-size: 0.875rem;
+  margin: 0 4px;
 }

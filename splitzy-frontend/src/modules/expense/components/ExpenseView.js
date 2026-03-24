@@ -7,6 +7,25 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
+import {
+  Car,
+  Film,
+  Lightbulb,
+  MoreHorizontal,
+  PlusCircle,
+  ShoppingBag,
+  Utensils,
+} from "lucide-react";
+
+//category + its icon
+const categories = {
+  food: <Utensils size={16} />, // 🍽️ Food
+  entertainment: <Film size={16} />, // 🎬 Movies/Fun
+  utilities: <Lightbulb size={16} />, // 💡 Bills/Electricity
+  travel: <Car size={16} />, // ✈️ Travel
+  shopping: <ShoppingBag size={16} />, // 🛍️ Shopping
+  other: <MoreHorizontal size={16} />, // ➕ Others
+};
 const ExpenseView = () => {
   const [expenses, setExpenses] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -85,6 +104,7 @@ const ExpenseView = () => {
       }
     },
   });
+
   return (
     <div>
       <div>
@@ -113,12 +133,12 @@ const ExpenseView = () => {
                 onChange={formik.handleChange}
               >
                 <option value="">Select Category</option>
-                <option value="food">Food</option>
-                <option value="travel">Travel</option>
-                <option value="shopping">Shopping</option>
-                <option value="bills">Bills</option>
-                <option value="entertainment">Entertainment</option>
-                <option value="other">Other</option>
+                {Object.keys(categories).map((key) => (
+                  <option key={key} value={key}>
+                    {categories[key]}{" "}
+                    {key.charAt(0).toUpperCase() + key.slice(1)}
+                  </option>
+                ))}
               </select>
               {formik.errors.category && formik.touched.category && (
                 <div className="error-message">{formik.errors.category}</div>
@@ -178,14 +198,14 @@ const ExpenseView = () => {
         )}
         {!showAddForm && (
           <button onClick={handleAddExpense} className="common-button">
-            Add Expense
+            <PlusCircle size={16} /> Add Expense
           </button>
         )}
       </div>
       <table className="common-table">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>#ID</th>
             <th>Title</th>
             <th>Category</th>
             <th>Amount</th>
@@ -198,24 +218,28 @@ const ExpenseView = () => {
               Loading...
             </td>
           ) : expenses.data.length > 0 ? (
-            expenses.data
-              .sort((a, b) => a.id - b.id)
-              .map((expense) => (
-                <tr
-                  key={expense.id}
-                  onClick={() => {
-                    setSelectedExpense(expense);
-                    setShowAddForm(true);
-                  }}
-                  title={`Click To Edit ID ${expense.id}`}
+            expenses.data.map((expense) => (
+              <tr
+                key={expense.id}
+                onClick={() => {
+                  setSelectedExpense(expense);
+                  setShowAddForm(true);
+                }}
+                title={`Click To Edit ID ${expense.id}`}
+              >
+                <td>#{expense.id}</td>
+                <td>{expense.title}</td>
+                <td
+                  style={{ display: "flex", alignItems: "center", gap: "4px" }}
                 >
-                  <td>{expense.id}</td>
-                  <td>{expense.title}</td>
-                  <td>{expense.category}</td>
-                  <td>${expense.amount}</td>
-                  <td>{new Date(expense.date).toLocaleDateString()}</td>
-                </tr>
-              ))
+                  {categories[expense.category]}
+                  {expense.category.charAt(0).toUpperCase() +
+                    expense.category.slice(1)}
+                </td>
+                <td>${expense.amount}</td>
+                <td>{new Date(expense.date).toLocaleDateString()}</td>
+              </tr>
+            ))
           ) : (
             <td colSpan="5" className="nodatafound">
               No expenses found.

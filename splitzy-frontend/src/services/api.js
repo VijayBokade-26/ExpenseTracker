@@ -2,11 +2,27 @@ import axios from "axios";
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 
-//make common API axois instance for all API calls
-
 const api = axios.create({
   baseURL: BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
+// ✅ ALWAYS get fresh token
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token"); // 🔥 moved here
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+  },
+  (error) => Promise.reject(error),
+);
+
+export default api;
 
 export const signupUser = async (data) => {
   const response = await api.post("/auth/signup", data);
@@ -19,34 +35,22 @@ export const loginUser = async (data) => {
 };
 
 export const getUser = async () => {
-  const token = localStorage.getItem("token");
-  const response = await api.get("/auth/profile", {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const response = await api.get("/auth/profile");
   return response.data;
 };
 
 export const fetchExpenses = async () => {
-  const token = localStorage.getItem("token");
-  const response = await api.get("/expenses", {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const response = await api.get("/expenses");
   return response.data;
 };
 
 export const createExpense = async (data) => {
-  const token = localStorage.getItem("token");
-  const response = await api.post("/expenses", data, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const response = await api.post("/expenses", data);
   return response.data;
 };
 
 export const updateExpense = async (data) => {
-  const token = localStorage.getItem("token");
-  const response = await api.put(`/expenses/${data.id}`, data, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const response = await api.put(`/expenses`, data);
   return response.data;
 };
 
@@ -63,7 +67,7 @@ export const updateExpense = async (data) => {
 // };
 
 // export const getUser = async () => {
-//   const token = localStorage.getItem("token");
+//
 
 //   const response = await fetch(`${BASE_URL}/auth/profile`, {
 //     method: "GET",
