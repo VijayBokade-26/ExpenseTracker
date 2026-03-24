@@ -337,6 +337,10 @@ const ExpenseView = () => {
                     style={{
                       backgroundColor: "#253046ff",
                       padding: "5px",
+                      borderRadius: "4px",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "4px",
                     }}
                   >
                     {categories[expense.category]}
