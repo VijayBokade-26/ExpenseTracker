@@ -9,6 +9,7 @@ import {
   Lightbulb,
   MoreHorizontal,
   PlusCircle,
+  Sheet,
   ShoppingBag,
   Trash2,
   Trash2Icon,
@@ -19,6 +20,7 @@ import {
   fetchExpenses,
   updateExpense,
 } from "../../../services/methods";
+import { exportToExcel } from "../../../helper/helpers";
 
 //category + its icon
 const categories = {
@@ -212,14 +214,34 @@ const ExpenseView = () => {
           )}
 
           {selectedRecords.length > 0 && !showAddForm && (
-            <button
-              onClick={() => {
-                // Handle bulk delete action here (not implemented in this snippet)
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                gap: "10px",
               }}
-              className=" common-button-danger "
             >
-              <Trash2 size={16} /> Delete Selected ({selectedRecords.length})
-            </button>
+              <button
+                onClick={() => {
+                  //remove user_id,created_at, updated_at from selectedRecords before exporting
+                  const recordsToExport = selectedRecords.map(
+                    ({ user_id, created_at, updated_at, ...rest }) => rest,
+                  );
+                  exportToExcel(recordsToExport, "Expenses");
+                }}
+                className=" common-button"
+              >
+                <Sheet size={16} /> Export
+              </button>
+              <button
+                onClick={() => {
+                  // Handle bulk delete action here (not implemented in this snippet)
+                }}
+                className=" common-button-danger "
+              >
+                <Trash2 size={16} /> Delete Selected ({selectedRecords.length})
+              </button>
+            </div>
           )}
         </div>
       </div>
