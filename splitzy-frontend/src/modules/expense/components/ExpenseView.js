@@ -185,7 +185,7 @@ const ExpenseView = () => {
                 <button
                   type="submit"
                   disabled={formik.isSubmitting}
-                  className="common-button"
+                  className="common-button-primary "
                 >
                   {selectedExpense ? "Update Expense" : "Add Expense"}
                 </button>
@@ -195,7 +195,7 @@ const ExpenseView = () => {
                     setShowAddForm(false);
                     setSelectedExpense(null);
                   }}
-                  className="common-button common-button-secondary"
+                  className=" common-button-secondary"
                 >
                   Cancel
                 </button>
@@ -208,8 +208,11 @@ const ExpenseView = () => {
           style={{ display: "flex", justifyContent: "space-between" }}
         >
           {!showAddForm && (
-            <button onClick={handleAddExpense} className="common-button">
-              <PlusCircle size={16} /> Add Expense
+            <button
+              onClick={handleAddExpense}
+              className="common-button-primary "
+            >
+              Add Expense
             </button>
           )}
 

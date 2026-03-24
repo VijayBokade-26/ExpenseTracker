@@ -1,6 +1,7 @@
 :root {
   /* Glass Background */
   --bg-glass: rgba(255, 255, 255, 0.04);
+  --common-primary: #04578f;
 
   /* Border */
   --border-soft: 1px solid rgba(110, 231, 183, 0.12);
