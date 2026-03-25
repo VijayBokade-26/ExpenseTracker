@@ -26,6 +26,12 @@ export const createExpense = async (data) => {
 };
 
 export const updateExpense = async (data) => {
-  const response = await api.put(`/expenses`, data);
+  const response = await api.put(`/expenses/${data.id}`, data);
+  return response.data;
+};
+
+//delete expense
+export const deleteExpense = async (ids) => {
+  const response = await api.delete(`/expenses/bulk-delete`, { data: { ids } });
   return response.data;
 };

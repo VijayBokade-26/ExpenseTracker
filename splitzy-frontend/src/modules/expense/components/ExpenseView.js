@@ -1,36 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
-import {
-  Car,
-  Film,
-  Lightbulb,
-  MoreHorizontal,
-  PlusCircle,
-  Sheet,
-  ShoppingBag,
-  Trash2,
-  Trash2Icon,
-  Utensils,
-} from "lucide-react";
+import { Sheet, Trash2, Trash2Icon } from "lucide-react";
 import {
   createExpense,
+  deleteExpense,
   fetchExpenses,
   updateExpense,
 } from "../../../services/methods";
 import { exportToExcel } from "../../../helper/helpers";
+import { expenseCategories } from "../../../common/constants";
+import Tooltip from "../../../common/components/Tooltip";
 
 //category + its icon
-const categories = {
-  food: <Utensils size={16} />, //  Food
-  entertainment: <Film size={16} />, //  Movies/Fun
-  utilities: <Lightbulb size={16} />, //  Bills/Electricity
-  travel: <Car size={16} />, //  Travel
-  shopping: <ShoppingBag size={16} />, //  Shopping
-  other: <MoreHorizontal size={16} />, //  Others
-};
+
 const ExpenseView = () => {
   const [expenses, setExpenses] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -89,6 +74,7 @@ const ExpenseView = () => {
         };
         if (selectedExpense) {
           payload.id = selectedExpense.id; // Include ID for editing existing expense
+
           await updateExpense(payload); // Call update API (not implemented in this snippet)
         } else {
           await createExpense(payload);
@@ -111,6 +97,60 @@ const ExpenseView = () => {
       }
     },
   });
+
+  //delete single /multiple expenses by ids (not implemented in this snippet)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleDeleteExpenses = async (ids) => {
+    try {
+      const response = await deleteExpense(ids);
+      toast.success(response.message || "Expense(s) deleted successfully!");
+      setSelectedRecords([]);
+      getExpenses(); // Refresh the expense list after deletion
+    } catch (error) {
+      console.error("Error deleting expenses:", error);
+      toast.error("Failed to delete expense(s). Please try again.");
+    }
+  };
+
+  const OnClickDelete = (ids) => {
+    const finalIds = Array.isArray(ids) ? ids : [ids];
+
+    if (finalIds.length === 0) return;
+    toast.dismiss();
+    const message =
+      finalIds.length > 1
+        ? `Delete ${finalIds.length} expenses?`
+        : `Delete this expense? (#${finalIds[0]})`;
+
+    toast.info(
+      ({ closeToast }) => (
+        <div>
+          <p>{message}</p>
+
+          <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+            <button
+              className="common-button-danger"
+              onClick={() => {
+                handleDeleteExpenses(finalIds);
+                closeToast();
+              }}
+            >
+              Yes, Delete
+            </button>
+
+            <button className="common-button-secondary" onClick={closeToast}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      ),
+      {
+        autoClose: false,
+        closeOnClick: false,
+        draggable: false,
+      },
+    );
+  };
 
   return (
     <div>
@@ -140,9 +180,9 @@ const ExpenseView = () => {
                 onChange={formik.handleChange}
               >
                 <option value="">Select Category</option>
-                {Object.keys(categories).map((key) => (
+                {Object.keys(expenseCategories).map((key) => (
                   <option key={key} value={key}>
-                    {categories[key]}{" "}
+                    {expenseCategories[key]}{" "}
                     {key.charAt(0).toUpperCase() + key.slice(1)}
                   </option>
                 ))}
@@ -154,7 +194,7 @@ const ExpenseView = () => {
               <br />
 
               <input
-                type="text"
+                type="number"
                 className="common-input"
                 placeholder="Amount"
                 name="amount"
@@ -238,7 +278,7 @@ const ExpenseView = () => {
               </button>
               <button
                 onClick={() => {
-                  // Handle bulk delete action here (not implemented in this snippet)
+                  OnClickDelete(selectedRecords.map((record) => record.id));
                 }}
                 className=" common-button-danger animation-fadeInOut "
               >
@@ -261,7 +301,7 @@ const ExpenseView = () => {
                 }
                 onChange={(e) => {
                   if (e.target.checked) {
-                    setSelectedRecords(expenses.data || []); // ✅ correct
+                    setSelectedRecords(expenses.data || []);
                   } else {
                     setSelectedRecords([]);
                   }
@@ -275,8 +315,8 @@ const ExpenseView = () => {
             </th>
             <th style={{ width: "10px" }}>Amount</th>
             <th style={{ width: "10px" }}>Date</th>
-            <th style={{ width: "5px" }} title="Operations">
-              OP
+            <th style={{ width: "5px" }} title="Action">
+              AC
             </th>
           </tr>
         </thead>
@@ -294,7 +334,7 @@ const ExpenseView = () => {
                   selectedRecords.length > 0 && setSelectedRecords([]);
                   setShowAddForm(true);
                 }}
-                title={`Click To Edit ID ${expense.id}`}
+                
               >
                 <td
                   onClick={(e) => {
@@ -327,12 +367,7 @@ const ExpenseView = () => {
                 </td>
                 <td>#{expense.id}</td>
                 <td>{expense.title}</td>
-                <td
-                  title={
-                    expense.category.charAt(0).toUpperCase() +
-                    expense.category.slice(1)
-                  }
-                >
+                <td>
                   <span
                     style={{
                       backgroundColor: "#253046ff",
@@ -343,19 +378,32 @@ const ExpenseView = () => {
                       gap: "4px",
                     }}
                   >
-                    {categories[expense.category]}
+                    <Tooltip
+                      position="top"
+                      text={
+                        expense.category.charAt(0).toUpperCase() +
+                        expense.category.slice(1)
+                      }
+                    >
+                      {expenseCategories[expense.category]}
+                    </Tooltip>
                   </span>
                 </td>
                 <td>${expense.amount}</td>
                 <td>{new Date(expense.date).toLocaleDateString()}</td>
                 <td
-                  title={`Remove Expense ${expense.id}`}
                   onClick={(e) => {
                     e.stopPropagation();
                     // Handle delete action here (not implemented in this snippet)
+                    OnClickDelete(expense.id);
                   }}
                 >
-                  <Trash2Icon size={16} color="red" />
+                  <Tooltip
+                    position="left"
+                    text={`Remove Expense ${expense.id}`}
+                  >
+                    <Trash2Icon size={16} color="red" />
+                  </Tooltip>
                 </td>
               </tr>
             ))

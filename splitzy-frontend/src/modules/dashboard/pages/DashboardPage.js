@@ -3,19 +3,21 @@ import "../../../styles/components/_dashboard.css";
 import ProfileHeader from "../components/ProfileHeader";
 
 import MainLayout from "../../../layout/MainLayout";
+import { Info } from "lucide-react";
+import Tooltip from "../../../common/components/Tooltip";
 
 const overviewCards = [
-  { label: "Total Spent", value: "₹24,860", trend: "+12%" },
-  { label: "This Month", value: "₹8,240", trend: "+4%" },
-  { label: "Budget Left", value: "₹11,760", trend: "Safe" },
-  { label: "Savings", value: "₹3,120", trend: "+18%" },
+  { label: "Total Spent", value: "24860" },
+  { label: "This Month", value: "8240" },
+  { label: "Budget Left", value: "11760" },
+  { label: "Savings", value: "3120" },
 ];
-
+const currency = "₹";
 const recentExpenses = [
-  { name: "Groceries", category: "Food", amount: "₹1,280", date: "Today" },
-  { name: "Metro", category: "Transport", amount: "₹160", date: "Today" },
-  { name: "Internet", category: "Bills", amount: "₹799", date: "Yesterday" },
-  { name: "Lunch", category: "Food", amount: "₹420", date: "Yesterday" },
+  { name: "Groceries", category: "Food", amount: "1280", date: "Today" },
+  { name: "Metro", category: "Transport", amount: "160", date: "Today" },
+  { name: "Internet", category: "Bills", amount: "799", date: "Yesterday" },
+  { name: "Lunch", category: "Food", amount: "420", date: "Yesterday" },
 ];
 
 const categoryBars = [
@@ -33,9 +35,23 @@ function Dashboard() {
       <section className="dashboard-stats">
         {overviewCards.map((card) => (
           <article className="stat-card" key={card.label}>
-            <span>{card.label}</span>
-            <strong>{card.value}</strong>
-            <p>{card.trend}</p>
+            <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+              {card.label}
+              {card.label === "Total Spent" && (
+                <Tooltip
+                  position="right"
+                  text="If you spent more than 50,000 in a month, it will be highlighted in red."
+                >
+                  <Info size={16} />
+                </Tooltip>
+              )}
+            </span>
+            <strong
+              className={parseInt(card.value, 10) > 50000 ? "text-red" : ""}
+            >
+              {card.value}
+            </strong>
+            {/* <p>{card.trend}</p> */}
           </article>
         ))}
       </section>
