@@ -1,18 +1,20 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
-from dotenv import load_dotenv
-import os
+from sqlalchemy.orm import declarative_base, sessionmaker
 
-load_dotenv()
+from app.config.settings import settings
 
-DATABASE_URL = f'postgresql://{os.getenv("DATABASE_USER")}:{os.getenv("DATABASE_PASS")}@{os.getenv("DATABASE_HOST")}:{os.getenv("DATABASE_PORT")}/{os.getenv("DATABASE_NAME")}' 
-# print(DATABASE_URL)
-engine = create_engine(DATABASE_URL)
+
+engine = create_engine(
+    settings.database_url,
+    pool_pre_ping=True,
+    future=True,
+)
 
 SessionLocal = sessionmaker(
-    autocommit = False,
+    autocommit=False,
     autoflush=False,
-    bind = engine
+    expire_on_commit=False,
+    bind=engine,
 )
 
 Base = declarative_base()
