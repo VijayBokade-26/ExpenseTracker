@@ -1,4 +1,4 @@
-//make export to xlsx file
+
 import * as XLSX from "xlsx";
 
 export const exportToExcel = (data, filename) => {

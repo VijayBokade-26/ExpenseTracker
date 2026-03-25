@@ -8,10 +8,10 @@ const api = axios.create({
     "Content-Type": "application/json",
   },
 });
-// ✅ ALWAYS get fresh token
+// ALWAYS get fresh token
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token"); // 🔥 moved here
+    const token = localStorage.getItem("token"); 
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
