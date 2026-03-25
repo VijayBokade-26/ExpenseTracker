@@ -15,12 +15,23 @@
   Created UI in React for :
   Signup
   Login
+  dashboard
+  folder restructure for managing backend and frontend code 
+
 
 🟡 Phase 3
 
 👉 Personal Expenses
  Add expense
  Get expenses
+ update expense
+ delete expense
+ bulk-expense-delete
+ dashboard api: total_spent, categorywise_spent, recent_spent
+ added alembic for tracking database changes 
+-----DOne---------
+
+
 
 🔵 Phase 3
 
