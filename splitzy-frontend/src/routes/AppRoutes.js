@@ -1,8 +1,10 @@
 // routes/AppRoutes.js
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Signup, Login } from "../modules/auth";
+import Signup from "../modules/auth/pages/Signup";
 
-import { Landing } from "../modules/landing";
+import Login from "../modules/auth/pages/Login";
+
+import Landing from "../modules/landing/pages/Landing";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
 import Dashboard from "../modules/dashboard/pages/DashboardPage";
