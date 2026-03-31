@@ -56,7 +56,7 @@ class DashboardCategorySpent(BaseModel):
 class DashboardRecentSpent(BaseModel):
     category: CategoryEnum
     totalSpent: Decimal
-    desc: str
+    title: str
     date: date
 
 class DashboardData(BaseModel):

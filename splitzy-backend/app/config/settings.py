@@ -38,9 +38,7 @@ def _build_database_url() -> str:
 
 
 def _parse_cors_origins() -> tuple[str, ...]:
-    raw_origins = os.getenv('CORS_ORIGINS', '')
-    if not raw_origins.strip():
-        return ('http://192.168.1.101:3000', 'http://127.0.0.1:3000')
+    raw_origins = os.getenv('CORS_ORIGIN_WHITELIST', None)
 
     return tuple(
         origin.strip()

@@ -218,7 +218,7 @@ def get_dashboard_details(
                                 Expense.user_id == current_user.id
                             ).scalar()
         
-        category_data = db.query(Expense.category, func.sum(Expense.amount).lable("total")
+        category_data = db.query(Expense.category, func.sum(Expense.amount).label("total")
                                     ).filter(
                                         Expense.user_id == current_user.id
                                     ).group_by(
@@ -227,7 +227,7 @@ def get_dashboard_details(
         category_wise_spent = [
             {
                 "category":cat,
-                "totalspent":float(total)
+                "totalSpent":float(total)
             }
             for cat , total in category_data
         ]
@@ -242,12 +242,18 @@ def get_dashboard_details(
             {
                 "category":exp.category,
                 "totalSpent":float(exp.amount),
-                "desc":exp.title,
-                "date":exp.date.isoformat()
+                "title":exp.title,
+                "date":exp.date
             }
             for exp in recent_expenses
         ]
-
+        # print("^^^^^^^^^",{"data":{
+        #             "totalSpentData":{
+        #                 "totalSpent":float(total_spent)
+        #             },
+        #             "categoryWiseSpent":category_wise_spent,
+        #             "recentSpent":recent_spent
+        #         }} )
         return {
                 "statusCode":200,
                 "message":"Fetched successfully",
@@ -256,10 +262,8 @@ def get_dashboard_details(
                         "totalSpent":float(total_spent)
                     },
                     "categoryWiseSpent":category_wise_spent,
-                    "recentspent":recent_spent
+                    "recentSpent":recent_spent
                 }
-
-
         }
     
     except SQLAlchemyError:
