@@ -20,6 +20,11 @@ export const fetchExpenses = async () => {
   return response.data;
 };
 
+export const fetchDashboardDetails = async () => {
+  const response = await api.get("/expenses/dashboard");
+  return response.data;
+};
+
 export const createExpense = async (data) => {
   const response = await api.post("/expenses", data);
   return response.data;

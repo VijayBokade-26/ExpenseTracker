@@ -308,15 +308,15 @@ const ExpenseView = () => {
                 }}
               />
             </th>
-            <th style={{ width: "5px" }}>#ID</th>
+            <th style={{ width: "5px" }}>Sr.No</th>
             <th>Title</th>
             <th title="Category" style={{ width: "2px" }}>
-              CT
+              Category
             </th>
             <th style={{ width: "10px" }}>Amount</th>
             <th style={{ width: "10px" }}>Date</th>
             <th style={{ width: "5px" }} title="Action">
-              AC
+              Action
             </th>
           </tr>
         </thead>
@@ -365,7 +365,7 @@ const ExpenseView = () => {
                     }}
                   />
                 </td>
-                <td>#{expense.id}</td>
+                <td>{expense.id}</td>
                 <td>{expense.title}</td>
                 <td>
                   <span
